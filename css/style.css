@@ -23,3 +23,8 @@ background-image: url("img/logo.png");
   background-repeat: no-repeat;
   background-position: center;
   }
+
+.comment img{
+     width: 50px !important;
+   height: 50px !important; 
+   }

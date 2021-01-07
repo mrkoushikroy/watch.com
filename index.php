@@ -2,6 +2,7 @@
 session_start();
 require_once"db/config.php";
 $id = $_SESSION['id'];
+if(isset($_SESSION['id'])){
 ?>
 <!doctype html>
 <html lang="en">
@@ -40,21 +41,23 @@ $id = $_SESSION['id'];
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <div class="alert alert-success alert-danger d-none" role="alert" id="frm_error"></div>
+      <div class="alert alert-success alert-danger d-none alert-dismissible" role="alert" id="frm_error">
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
         <form method="post">
             <div class="form-group">
                 <!-- <label for="user_id">user_id</label> -->
-                <input type="text" class="form-control" id="user_id" name="user_id"  value="<?php echo $id; ?>">
+                <input type="text" class="form-control" id="user_id" name="user_id"  value="<?php echo $id; ?>" hidden>
             </div>
             <div class="form-group">
                 <!-- <label for="offer">watch_id</label> -->
-                <input type="text" class="form-control" id="watch_id" name="watch_id">
+                <input type="text" class="form-control" id="watch_id" name="watch_id" hidden>
             </div>
-            <div class="form-group">
-                <label for="offer">Enter offer</label>
-                <input type="text" class="form-control" id="offer" name="offer" placeholder="Enter offer">
+            <div class="form-group my-4">
+                <label for="offer mb-2">Enter offer</label>
+                <textarea type="text" class="form-control" id="offer" name="offer" placeholder="Enter offer"></textarea>
             </div>
-            <button type="button" class="btn btn-primary" onclick="modalsubmit()">Submit</button>
+            <button type="button" class="btn btn-primary" id="send_offer" onclick="modalsubmit()">Submit</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -63,6 +66,9 @@ $id = $_SESSION['id'];
     </div>
   </div>
 </div>
+<!-- ---------------start footer------------------ -->
+<?php include"footer.php"; ?>
+<!-- ---------------end footer------------------ -->
 
 
     <script src="js/jquery.js"></script>
@@ -79,6 +85,7 @@ $id = $_SESSION['id'];
             });
         }
         loadtable();
+        jQuery('#frm_error').html('');
 
         $(document).on("click", ".edit-btn", function() {
             var prodid = $(this).data('eid');
@@ -97,16 +104,17 @@ $id = $_SESSION['id'];
                 type: "POST",
                 data: 'watch_id='+watch_id+'&user_id='+user_id+'&offer='+offer,
           success: function(data){
-              alert(data);
+              // alert(data);
               if(data == "correct"){
                 jQuery('#frm_error').removeClass('d-none');
                 jQuery('#frm_error').removeClass('alert-danger');
                 jQuery('#frm_error').html('offer send successfully');
+                jQuery('#send_offer').html('sent');
               }
               else{
                 jQuery('#frm_error').removeClass('d-none');
                 jQuery('#frm_error').removeClass('alert-success');
-                jQuery('#frm_error').html('You have already send offer');
+                jQuery('#frm_error').html(data);
               }
             }
             });
@@ -125,3 +133,9 @@ $id = $_SESSION['id'];
 </body>
 
 </html>
+<?php
+}
+else{
+  header('location:login.php');
+}
+?>
