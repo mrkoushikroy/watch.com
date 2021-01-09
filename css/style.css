@@ -28,3 +28,11 @@ background-image: url("img/logo.png");
      width: 50px !important;
    height: 50px !important; 
    }
+
+   
+tbody{
+    display:block;
+    overflow:auto;
+    height:500px !important;
+    width:100%;
+  }

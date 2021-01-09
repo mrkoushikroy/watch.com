@@ -6,7 +6,7 @@ $id= $_SESSION['id'];
 $sql="SELECT offer.offer, u.name, offer.watch_id, w.title, offer.user_id, offer.oid FROM offer 
     INNER JOIN user u on  offer.user_id = u.uid 
     INNER JOIN watch w on  offer.watch_id = w.wid  
-    where watch_id in(select wid from watch where user_id = '$id')  ";
+    where watch_id in(select wid from watch where user_id = '$id')  ORDER BY oid DESC";
 
 $result = mysqli_query($conn, $sql);
 $no=mysqli_num_rows($result);

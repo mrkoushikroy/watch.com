@@ -3,7 +3,7 @@
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'watchbasement');
+define('DB_NAME', 'ITECH3108_000000_A1');
 
 
 // Try connecting to DB

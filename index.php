@@ -85,7 +85,6 @@ if(isset($_SESSION['id'])){
             });
         }
         loadtable();
-        jQuery('#frm_error').html('');
 
         $(document).on("click", ".edit-btn", function() {
             var prodid = $(this).data('eid');
@@ -108,15 +107,19 @@ if(isset($_SESSION['id'])){
               if(data == "correct"){
                 jQuery('#frm_error').removeClass('d-none');
                 jQuery('#frm_error').removeClass('alert-danger');
+                jQuery('#frm_error').addClass('alert-success');
                 jQuery('#frm_error').html('offer send successfully');
                 jQuery('#send_offer').html('sent');
+                
               }
               else{
                 jQuery('#frm_error').removeClass('d-none');
                 jQuery('#frm_error').removeClass('alert-success');
                 jQuery('#frm_error').html(data);
               }
+
             }
+
             });
         }
 

@@ -28,7 +28,7 @@ if(isset($_SESSION['id'])){
 
                 $sql="SELECT m.text, u.name, m.sent FROM message m
                     INNER JOIN user u on  m.from_user_id = u.uid  
-                    where to_user_id = '$id'  ";
+                    where to_user_id = '$id' ORDER BY mid DESC ";
                 $result = mysqli_query($conn, $sql);
                 $no=mysqli_num_rows($result);
                 if(mysqli_num_rows($result)>0){
@@ -65,7 +65,7 @@ if(isset($_SESSION['id'])){
 
                 $sql="SELECT m.text, u.name, m.sent FROM message m
                     INNER JOIN user u on  m.to_user_id = u.uid  
-                    where from_user_id = '$id'  ";
+                    where from_user_id = '$id'  ORDER BY mid DESC";
                 $result = mysqli_query($conn, $sql);
                 $no=mysqli_num_rows($result);
                 if(mysqli_num_rows($result)>0){
